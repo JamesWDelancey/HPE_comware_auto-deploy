@@ -6,17 +6,19 @@
 #apt-get -y install virtualenv
 #apt -y autoremove
 
-git clone https://github.com/Mierdin/jinja2-nxos-config.git config
+#git clone https://github.com/Mierdin/jinja2-nxos-config.git config
 #apt-get -y install isc-dhcp-server
 #cp /etc/dhcp/dhcpd.conf /etc/dhcp/dhcpd_bak.conf
-#echo 'default-lease-time 3600;' > /etc/dhcp/dhcpd.conf
-#echo 'authoritative;' >> /etc/dhcp/dhcpd.conf
-#echo 'max-lease-time 3600;' >> /etc/dhcp/dhcpd.conf
-#echo 'ddns-update-style none;' >> /etc/dhcp/dhcpd.conf
-#echo 'subnet 10.1.1.0 netmask 255.255.255.0 {' >> /etc/dhcp/dhcpd.conf
-#echo '    range 10.1.1.10 10.1.1.250;' >> /etc/dhcp/dhcpd.conf
-#echo '}' >> /etc/dhcp/dhcpd.conf
-#service isc-dhcp-server restart
+echo 'default-lease-time 3600;' > /etc/dhcp/dhcpd.conf
+echo 'authoritative;' >> /etc/dhcp/dhcpd.conf
+echo 'max-lease-time 3600;' >> /etc/dhcp/dhcpd.conf
+echo 'ddns-update-style none;' >> /etc/dhcp/dhcpd.conf
+echo 'subnet 10.1.1.0 netmask 255.255.255.0 {' >> /etc/dhcp/dhcpd.conf
+echo '    range 10.1.1.10 10.1.1.250;' >> /etc/dhcp/dhcpd.conf
+echo '    option tftp-server-name "10.1.1.1";' >> /etc/dhcp/dhcpd.conf
+echo '    option bootfile-name "boot.py";' >> /etc/dhcp/dhcpd.conf
+echo '}' >> /etc/dhcp/dhcpd.conf
+service isc-dhcp-server restart
 #echo 'source-directory /etc/network/interfaces.d' > /etc/network/interfaces
 #echo 'auto lo' >> /etc/network/interfaces
 #echo 'iface lo inet loopback' >> /etc/network/interfaces
@@ -28,7 +30,10 @@ git clone https://github.com/Mierdin/jinja2-nxos-config.git config
 #ifconfig | grep addr
 #mkdir ../tftpboot
 #virtualenv .
+source bin/activate
 #pip install jinja2
+#pip install pyyaml
+echo $PATH
 
 #apt-get -y install xinetd tftpd tftp
 #echo 'service tftp' > /etc/xinetd.d/tftp
@@ -56,9 +61,18 @@ git clone https://github.com/Mierdin/jinja2-nxos-config.git config
 #echo 'pasv_enable=YES' >> /etc/vsftpd.conf
 #echo 'pasv_min_port=40000' >> /etc/vsftpd.conf
 #echo 'pasv_max_port=40100' >> /etc/vsftpd.conf
-#service vsftpd restart
+service vsftpd restart
 
-
+rm /home/james/tftpboot/*.cfg
 
 #something wrong with vsftp -james
 netstat -plnut4
+
+#touch tftpboot/boot.py
+#chmod 777 tftpboot/boot.py
+
+#only for raspberry pi
+#serial adapter is /dev/ttyUSB0 on raspberry pi
+apt-get -y remove brltty
+apt-get -y install minicom
+
