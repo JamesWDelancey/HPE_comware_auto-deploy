@@ -3,11 +3,52 @@ import comware
 import os
 import sys
 import json
+import time
+import termios
 
 # Name variables, these can be replaced by SED if needed
 serverTftp="10.1.1.1"
 serverdataFtp="10.1.1.1"
+file1="run.py"
+file2="template.txt"
+file3="varMatrix.json"
+def copyFiles():
+    try:
+        comware.CLI("system ; interface vlan 1 ; ip address dhcp")
+    except SystemError:
+        pass
+    try:
+        comware.CLI("ping 8.8.8.8")
+    except SystemError:
+        pass
+    try:
+        comware.CLI("tftp " + serverTftp + " get " + file1)
+    except SystemError:
+        pass
+    try:
+        comware.CLI("ping 8.8.8.8")
+    except SystemError:
+        pass
+    try:
+        comware.CLI("tftp " + serverTftp + " get " + file2)
+    except SystemError:
+        pass
+    try:
+        comware.CLI("ping 8.8.8.8")
+    except SystemError:
+        pass
+    try:
+        comware.CLI("tftp " + serverTftp + " get " + file3)
+    except SystemError:
+        pass
+    try:
+        comware.CLI("ping 8.8.8.8")
+    except SystemError:
+        pass
+copyFiles()
 switchMacAddress=comware.CLI("disp irf | i MAC").get_output()[1][-14:].replace("-","")
+
+import run
 
 switchSysname=boot_dict[switchMacAddress][0]
 irfMemberNumber=boot_dict[switchMacAddress][1]
@@ -27,22 +68,22 @@ def levelFirmware(firmwareMain,firmwareBackup,serverFtp,serverTftp):
     """Update the firmware in the switch. 
     Pulls the files firmware main and backup from FTP server.
     """
-    comware.CLI("tftp " + serverTftp + " get " + firmwareMain)
-    comware.CLI("boot-loader file flash:/" + firmwareMain + " s 1 m")
-    comware.CLI("delete *.bin")
     comware.CLI("tftp " + serverTftp + " get " + firmwareBackup)
     comware.CLI("boot-loader file flash:/" + firmwareBackup + " s 1 b")
+    comware.CLI("delete *.bin")
+    comware.CLI("tftp " + serverTftp + " get " + firmwareMain)
+    comware.CLI("boot-loader file flash:/" + firmwareMain + " s 1 m")
     comware.CLI("delete *.ipe")
 
 def getConfig(configMain,configBackup,serverTftp):
     """Pull down the right configuraiton for the switch
     """
     comware.CLI("tftp " + serverTftp + " get " + configMain)
-    comware.CLI("startup saved-configuration " + configMain + " main")
     comware.CLI("startup saved-configuration " + configBackup + " backup")
+    comware.CLI("startup saved-configuration " + configMain + " main")
 
 #setMember(irfMemberNumber)
-#levelFirmware(firmwareMain,firmwareBackup,serverFtp,serverTftp)
+levelFirmware(firmwareMain,firmwareBackup,serverFtp,serverTftp)
 
 
 getConfig(configMain,configBackup,serverTftp)
