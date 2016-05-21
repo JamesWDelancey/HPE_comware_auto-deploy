@@ -9,16 +9,16 @@
 #git clone https://github.com/Mierdin/jinja2-nxos-config.git config
 #apt-get -y install isc-dhcp-server
 #cp /etc/dhcp/dhcpd.conf /etc/dhcp/dhcpd_bak.conf
-echo 'default-lease-time 3600;' > /etc/dhcp/dhcpd.conf
-echo 'authoritative;' >> /etc/dhcp/dhcpd.conf
-echo 'max-lease-time 3600;' >> /etc/dhcp/dhcpd.conf
-echo 'ddns-update-style none;' >> /etc/dhcp/dhcpd.conf
-echo 'subnet 10.1.1.0 netmask 255.255.255.0 {' >> /etc/dhcp/dhcpd.conf
-echo '    range 10.1.1.10 10.1.1.250;' >> /etc/dhcp/dhcpd.conf
-echo '    option tftp-server-name "10.1.1.1";' >> /etc/dhcp/dhcpd.conf
-echo '    option bootfile-name "boot.py";' >> /etc/dhcp/dhcpd.conf
-echo '}' >> /etc/dhcp/dhcpd.conf
-service isc-dhcp-server restart
+#echo 'default-lease-time 3600;' > /etc/dhcp/dhcpd.conf
+#echo 'authoritative;' >> /etc/dhcp/dhcpd.conf
+#echo 'max-lease-time 3600;' >> /etc/dhcp/dhcpd.conf
+#echo 'ddns-update-style none;' >> /etc/dhcp/dhcpd.conf
+#echo 'subnet 10.1.1.0 netmask 255.255.255.0 {' >> /etc/dhcp/dhcpd.conf
+#echo '    range 10.1.1.10 10.1.1.250;' >> /etc/dhcp/dhcpd.conf
+#echo '    option tftp-server-name "10.1.1.1";' >> /etc/dhcp/dhcpd.conf
+#echo '    option bootfile-name "boot.py";' >> /etc/dhcp/dhcpd.conf
+#echo '}' >> /etc/dhcp/dhcpd.conf
+#service isc-dhcp-server restart
 #echo 'source-directory /etc/network/interfaces.d' > /etc/network/interfaces
 #echo 'auto lo' >> /etc/network/interfaces
 #echo 'iface lo inet loopback' >> /etc/network/interfaces
@@ -61,7 +61,7 @@ echo $PATH
 #echo 'pasv_enable=YES' >> /etc/vsftpd.conf
 #echo 'pasv_min_port=40000' >> /etc/vsftpd.conf
 #echo 'pasv_max_port=40100' >> /etc/vsftpd.conf
-service vsftpd restart
+#service vsftpd restart
 
 rm /home/james/tftpboot/*.cfg
 
@@ -73,6 +73,7 @@ netstat -plnut4
 
 #only for raspberry pi
 #serial adapter is /dev/ttyUSB0 on raspberry pi
-apt-get -y remove brltty
-apt-get -y install minicom
+#apt-get -y remove brltty
+#apt-get -y install minicom
 
+python -c 'import sys, yaml, json; json.dump(yaml.load(sys.stdin),sys.stdout, indent=4)' < tftpboot/varMatrix.yaml > tftpboot/varMatrix.json

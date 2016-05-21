@@ -1,16 +1,12 @@
 # Copyright 2016. by James Delancey
-boot_dict={
-# mac: sysname,irfNo,loopback,firmware
-"2c233a5b744e":["switch1","1","1.1.1.1","5900_5920-CMW710-R2311P06.ipe"]
-}
-
 import comware
 import os
 import sys
+import json
 
 # Name variables, these can be replaced by SED if needed
 serverTftp="10.1.1.1"
-serverFtp="10.1.1.1"
+serverdataFtp="10.1.1.1"
 switchMacAddress=comware.CLI("disp irf | i MAC").get_output()[1][-14:].replace("-","")
 
 switchSysname=boot_dict[switchMacAddress][0]
@@ -33,7 +29,10 @@ def levelFirmware(firmwareMain,firmwareBackup,serverFtp,serverTftp):
     """
     comware.CLI("tftp " + serverTftp + " get " + firmwareMain)
     comware.CLI("boot-loader file flash:/" + firmwareMain + " s 1 m")
+    comware.CLI("delete *.bin")
+    comware.CLI("tftp " + serverTftp + " get " + firmwareBackup)
     comware.CLI("boot-loader file flash:/" + firmwareBackup + " s 1 b")
+    comware.CLI("delete *.ipe")
 
 def getConfig(configMain,configBackup,serverTftp):
     """Pull down the right configuraiton for the switch

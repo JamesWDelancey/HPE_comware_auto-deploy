@@ -1,0 +1,841 @@
+#
+ version 7.1.045, Release 2311P06
+#
+ sysname {{ switchList[switch]["Switch Name"] }}
+#
+ clock timezone PST minus 08:00:00
+ clock summer-time PDT 02:00:00 March second Sunday 02:00:00 November first Sunday 01:00:00
+#
+ undo copyright-info enable
+#
+ telnet server enable
+#
+ irf domain {{ switchList[switch]["irfDomain"] }}
+ irf mac-address persistent timer
+ irf auto-update enable
+ undo irf link-delay
+ irf member 1 priority 32
+ irf member 2 priority 31
+#
+ospf 1 router-id {{ switchList[switch]['routerId'] }}
+ bandwidth-reference 100000
+ enable link-local-signaling
+ enable out-of-band-resynchronization
+ graceful-restart ietf
+ area 0.0.0.0
+  network 10.250.254.53 0.0.0.0
+  network 10.255.250.201 0.0.0.0
+  network 10.255.250.205 0.0.0.0
+  network 10.255.250.209 0.0.0.0
+  network 10.255.254.53 0.0.0.0
+ area 0.0.0.7
+  network 10.255.250.194 0.0.0.0
+#
+ ip unreachables enable
+ ip ttl-expires enable
+#
+ sflow agent ip {{ switchList[switch]['loopbackIp'] }}
+ sflow source ip {{ switchList[switch]['loopbackIp'] }}
+ sflow collector 1 ip {{ switchList[switch]['sflowCollector'] }} description "CLI Collector"
+#
+ lldp global enable
+ lldp compliance cdp
+#
+ burst-mode enable
+#
+ system-working-mode standard
+ fan prefer-direction slot 1 {{ switchList[switch]['fanDirection'] }}
+ fan prefer-direction slot 2 {{ switchList[switch]['fanDirection'] }}
+ password-recovery enable
+#
+vlan 1
+#
+irf-port 1/1
+ port group interface Ten-GigabitEthernet1/0/21
+ port group interface Ten-GigabitEthernet1/0/22
+#
+irf-port 1/2
+ port group interface Ten-GigabitEthernet1/0/23
+ port group interface Ten-GigabitEthernet1/0/24
+#
+irf-port 2/1
+ port group interface Ten-GigabitEthernet2/0/23
+ port group interface Ten-GigabitEthernet2/0/24
+#
+irf-port 2/2
+ port group interface Ten-GigabitEthernet2/0/21
+ port group interface Ten-GigabitEthernet2/0/22
+#
+stp region-configuration
+ region-name MSHL-ALPHA
+ revision-level 1
+ active region-configuration
+#
+ stp bpdu-protection
+ stp pathcost-standard dot1t
+ stp global enable
+#
+interface Route-Aggregation1
+ description To HP Core
+ ip address 10.255.250.194 255.255.255.252
+ ospf authentication-mode md5 1 cipher $c$3$RQJFiSEy0r3G5PR2LjA9AZOSfCND498t6rtF2gkO
+ ospf network-type p2p
+ pim sm
+ link-aggregation mode dynamic
+#
+interface Route-Aggregation2
+ description To RWC Alpha over WAVE
+ ip address 10.255.250.205 255.255.255.252
+ ospf authentication-mode md5 1 cipher $c$3$RQJFiSEy0r3G5PR2LjA9AZOSfCND498t6rtF2gkO
+ ospf network-type p2p
+ pim sm
+ link-aggregation mode dynamic
+#
+interface Route-Aggregation3
+ description To RWC Alpha over WAVE (later OA)
+ ip address 10.255.250.201 255.255.255.252
+ ospf authentication-mode md5 1 cipher $c$3$RQJFiSEy0r3G5PR2LjA9AZOSfCND498t6rtF2gkO
+ ospf network-type p2p
+ pim sm
+ link-aggregation mode dynamic
+#
+interface Route-Aggregation4
+ description To HP DMZ
+ ip address 10.255.250.198 255.255.255.252
+ link-aggregation mode dynamic
+#
+interface NULL0
+#
+interface LoopBack0
+ ip address 10.255.254.53 255.255.255.255
+#
+interface M-GigabitEthernet0/0/0
+ shutdown
+#
+interface Ten-GigabitEthernet1/0/1
+ port link-mode route
+ description To HP Core
+ undo jumboframe enable
+ lldp compliance admin-status cdp txrx
+ qos trust dscp
+ qos wrr weight
+ qos wrr ef group sp
+ qos wrr cs6 group sp
+ qos wrr cs7 group sp
+ port link-aggregation group 1
+#
+interface Ten-GigabitEthernet1/0/2
+ port link-mode route
+ description To HP Core
+ undo jumboframe enable
+ lldp compliance admin-status cdp txrx
+ qos trust dscp
+ qos wrr weight
+ qos wrr ef group sp
+ qos wrr cs6 group sp
+ qos wrr cs7 group sp
+ port link-aggregation group 1
+#
+interface Ten-GigabitEthernet1/0/3
+ port link-mode route
+ description To RWC Alpha over WAVE
+ undo jumboframe enable
+ lldp compliance admin-status cdp txrx
+ qos trust dscp
+ qos wrr weight
+ qos wrr ef group sp
+ qos wrr cs6 group sp
+ qos wrr cs7 group sp
+ port link-aggregation group 2
+#
+interface Ten-GigabitEthernet1/0/4
+ port link-mode route
+ description To RWC Alpha over WAVE
+ undo jumboframe enable
+ lldp compliance admin-status cdp txrx
+ qos trust dscp
+ qos wrr weight
+ qos wrr ef group sp
+ qos wrr cs6 group sp
+ qos wrr cs7 group sp
+ port link-aggregation group 3
+#
+interface Ten-GigabitEthernet1/0/5
+ port link-mode route
+ description To HP DMZ
+ undo jumboframe enable
+ lldp compliance admin-status cdp txrx
+ qos trust dscp
+ qos wrr weight
+ qos wrr ef group sp
+ qos wrr cs6 group sp
+ qos wrr cs7 group sp
+ port link-aggregation group 4
+#
+interface Ten-GigabitEthernet1/0/6
+ port link-mode route
+ description To HP DMZ
+ undo jumboframe enable
+ lldp compliance admin-status cdp txrx
+ qos trust dscp
+ qos wrr weight
+ qos wrr ef group sp
+ qos wrr cs6 group sp
+ qos wrr cs7 group sp
+ port link-aggregation group 4
+#
+interface Ten-GigabitEthernet1/0/7
+ port link-mode route
+ description To RWC over Microwave
+ shutdown
+ undo jumboframe enable
+ ospf cost 2000
+ ospf authentication-mode md5 1 cipher $c$3$R1yr7YKovRrWI5PRF+n9lDTBMYWkbYN/P+OIJ63q
+ ospf network-type p2p
+ pim sm
+ lldp compliance admin-status cdp txrx
+ sflow flow collector 1
+ sflow sampling-rate 2000
+ qos trust dscp
+ qos wrr weight
+ qos wrr ef group sp
+ qos wrr cs6 group sp
+ qos wrr cs7 group sp
+#
+interface Ten-GigabitEthernet1/0/8
+ port link-mode route
+ description unusedPort
+ shutdown
+ undo jumboframe enable
+ lldp compliance admin-status cdp txrx
+ sflow flow collector 1
+ sflow sampling-rate 2000
+ qos trust dscp
+ qos wrr weight
+ qos wrr ef group sp
+ qos wrr cs6 group sp
+ qos wrr cs7 group sp
+#
+interface Ten-GigabitEthernet1/0/9
+ port link-mode route
+ description unusedPort
+ shutdown
+ undo jumboframe enable
+ lldp compliance admin-status cdp txrx
+ sflow flow collector 1
+ sflow sampling-rate 2000
+ qos trust dscp
+ qos wrr weight
+ qos wrr ef group sp
+ qos wrr cs6 group sp
+ qos wrr cs7 group sp
+#
+interface Ten-GigabitEthernet1/0/10
+ port link-mode route
+ description unusedPort
+ shutdown
+ undo jumboframe enable
+ lldp compliance admin-status cdp txrx
+ sflow flow collector 1
+ sflow sampling-rate 2000
+ qos trust dscp
+ qos wrr weight
+ qos wrr ef group sp
+ qos wrr cs6 group sp
+ qos wrr cs7 group sp
+#
+interface Ten-GigabitEthernet1/0/11
+ port link-mode route
+ description unusedPort
+ shutdown
+ undo jumboframe enable
+ lldp compliance admin-status cdp txrx
+ sflow flow collector 1
+ sflow sampling-rate 2000
+ qos trust dscp
+ qos wrr weight
+ qos wrr ef group sp
+ qos wrr cs6 group sp
+ qos wrr cs7 group sp
+#
+interface Ten-GigabitEthernet1/0/12
+ port link-mode route
+ description unusedPort
+ shutdown
+ undo jumboframe enable
+ lldp compliance admin-status cdp txrx
+ sflow flow collector 1
+ sflow sampling-rate 2000
+ qos trust dscp
+ qos wrr weight
+ qos wrr ef group sp
+ qos wrr cs6 group sp
+ qos wrr cs7 group sp
+#
+interface Ten-GigabitEthernet1/0/13
+ port link-mode route
+ description unusedPort
+ shutdown
+ undo jumboframe enable
+ lldp compliance admin-status cdp txrx
+ sflow flow collector 1
+ sflow sampling-rate 2000
+ qos trust dscp
+ qos wrr weight
+ qos wrr ef group sp
+ qos wrr cs6 group sp
+ qos wrr cs7 group sp
+#
+interface Ten-GigabitEthernet1/0/14
+ port link-mode route
+ description unusedPort
+ shutdown
+ undo jumboframe enable
+ lldp compliance admin-status cdp txrx
+ sflow flow collector 1
+ sflow sampling-rate 2000
+ qos trust dscp
+ qos wrr weight
+ qos wrr ef group sp
+ qos wrr cs6 group sp
+ qos wrr cs7 group sp
+#
+interface Ten-GigabitEthernet1/0/15
+ port link-mode route
+ description unusedPort
+ shutdown
+ undo jumboframe enable
+ lldp compliance admin-status cdp txrx
+ sflow flow collector 1
+ sflow sampling-rate 2000
+ qos trust dscp
+ qos wrr weight
+ qos wrr ef group sp
+ qos wrr cs6 group sp
+ qos wrr cs7 group sp
+#
+interface Ten-GigabitEthernet1/0/16
+ port link-mode route
+ description unusedPort
+ shutdown
+ undo jumboframe enable
+ lldp compliance admin-status cdp txrx
+ sflow flow collector 1
+ sflow sampling-rate 2000
+ qos trust dscp
+ qos wrr weight
+ qos wrr ef group sp
+ qos wrr cs6 group sp
+ qos wrr cs7 group sp
+#
+interface Ten-GigabitEthernet1/0/17
+ port link-mode route
+ description unusedPort
+ shutdown
+ undo jumboframe enable
+ lldp compliance admin-status cdp txrx
+ sflow flow collector 1
+ sflow sampling-rate 2000
+ qos trust dscp
+ qos wrr weight
+ qos wrr ef group sp
+ qos wrr cs6 group sp
+ qos wrr cs7 group sp
+#
+interface Ten-GigabitEthernet1/0/18
+ port link-mode route
+ description unusedPort
+ shutdown
+ undo jumboframe enable
+ lldp compliance admin-status cdp txrx
+ sflow flow collector 1
+ sflow sampling-rate 2000
+ qos trust dscp
+ qos wrr weight
+ qos wrr ef group sp
+ qos wrr cs6 group sp
+ qos wrr cs7 group sp
+#
+interface Ten-GigabitEthernet1/0/19
+ port link-mode route
+ description unusedPort
+ shutdown
+ undo jumboframe enable
+ lldp compliance admin-status cdp txrx
+ sflow flow collector 1
+ sflow sampling-rate 2000
+ qos trust dscp
+ qos wrr weight
+ qos wrr ef group sp
+ qos wrr cs6 group sp
+ qos wrr cs7 group sp
+#
+interface Ten-GigabitEthernet1/0/20
+ port link-mode route
+ description unusedPort
+ shutdown
+ undo jumboframe enable
+ lldp compliance admin-status cdp txrx
+ sflow flow collector 1
+ sflow sampling-rate 2000
+ qos trust dscp
+ qos wrr weight
+ qos wrr ef group sp
+ qos wrr cs6 group sp
+ qos wrr cs7 group sp
+#
+interface Ten-GigabitEthernet2/0/1
+ port link-mode route
+ description To HP Core
+ undo jumboframe enable
+ lldp compliance admin-status cdp txrx
+ qos trust dscp
+ qos wrr weight
+ qos wrr ef group sp
+ qos wrr cs6 group sp
+ qos wrr cs7 group sp
+ port link-aggregation group 1
+#
+interface Ten-GigabitEthernet2/0/2
+ port link-mode route
+ description To HP Core
+ undo jumboframe enable
+ lldp compliance admin-status cdp txrx
+ qos trust dscp
+ qos wrr weight
+ qos wrr ef group sp
+ qos wrr cs6 group sp
+ qos wrr cs7 group sp
+ port link-aggregation group 1
+#
+interface Ten-GigabitEthernet2/0/3
+ port link-mode route
+ description To RWC Alpha over WAVE
+ undo jumboframe enable
+ lldp compliance admin-status cdp txrx
+ qos trust dscp
+ qos wrr weight
+ qos wrr ef group sp
+ qos wrr cs6 group sp
+ qos wrr cs7 group sp
+ port link-aggregation group 2
+#
+interface Ten-GigabitEthernet2/0/4
+ port link-mode route
+ description To RWC Alpha over WAVE
+ undo jumboframe enable
+ lldp compliance admin-status cdp txrx
+ qos trust dscp
+ qos wrr weight
+ qos wrr ef group sp
+ qos wrr cs6 group sp
+ qos wrr cs7 group sp
+ port link-aggregation group 3
+#
+interface Ten-GigabitEthernet2/0/5
+ port link-mode route
+ description To HP DMZ
+ undo jumboframe enable
+ lldp compliance admin-status cdp txrx
+ qos trust dscp
+ qos wrr weight
+ qos wrr ef group sp
+ qos wrr cs6 group sp
+ qos wrr cs7 group sp
+ port link-aggregation group 4
+#
+interface Ten-GigabitEthernet2/0/6
+ port link-mode route
+ description To HP DMZ
+ undo jumboframe enable
+ lldp compliance admin-status cdp txrx
+ qos trust dscp
+ qos wrr weight
+ qos wrr ef group sp
+ qos wrr cs6 group sp
+ qos wrr cs7 group sp
+ port link-aggregation group 4
+#
+interface Ten-GigabitEthernet2/0/7
+ port link-mode route
+ description unusedPort
+ shutdown
+ undo jumboframe enable
+ lldp compliance admin-status cdp txrx
+ sflow flow collector 1
+ sflow sampling-rate 2000
+ qos trust dscp
+ qos wrr weight
+ qos wrr ef group sp
+ qos wrr cs6 group sp
+ qos wrr cs7 group sp
+#
+interface Ten-GigabitEthernet2/0/8
+ port link-mode route
+ description unusedPort
+ shutdown
+ undo jumboframe enable
+ lldp compliance admin-status cdp txrx
+ sflow flow collector 1
+ sflow sampling-rate 2000
+ qos trust dscp
+ qos wrr weight
+ qos wrr ef group sp
+ qos wrr cs6 group sp
+ qos wrr cs7 group sp
+#
+interface Ten-GigabitEthernet2/0/9
+ port link-mode route
+ description unusedPort
+ shutdown
+ undo jumboframe enable
+ lldp compliance admin-status cdp txrx
+ sflow flow collector 1
+ sflow sampling-rate 2000
+ qos trust dscp
+ qos wrr weight
+ qos wrr ef group sp
+ qos wrr cs6 group sp
+ qos wrr cs7 group sp
+#
+interface Ten-GigabitEthernet2/0/10
+ port link-mode route
+ description unusedPort
+ shutdown
+ undo jumboframe enable
+ lldp compliance admin-status cdp txrx
+ sflow flow collector 1
+ sflow sampling-rate 2000
+ qos trust dscp
+ qos wrr weight
+ qos wrr ef group sp
+ qos wrr cs6 group sp
+ qos wrr cs7 group sp
+#
+interface Ten-GigabitEthernet2/0/11
+ port link-mode route
+ description unusedPort
+ shutdown
+ undo jumboframe enable
+ lldp compliance admin-status cdp txrx
+ sflow flow collector 1
+ sflow sampling-rate 2000
+ qos trust dscp
+ qos wrr weight
+ qos wrr ef group sp
+ qos wrr cs6 group sp
+ qos wrr cs7 group sp
+#
+interface Ten-GigabitEthernet2/0/12
+ port link-mode route
+ description unusedPort
+ shutdown
+ undo jumboframe enable
+ lldp compliance admin-status cdp txrx
+ sflow flow collector 1
+ sflow sampling-rate 2000
+ qos trust dscp
+ qos wrr weight
+ qos wrr ef group sp
+ qos wrr cs6 group sp
+ qos wrr cs7 group sp
+#
+interface Ten-GigabitEthernet2/0/13
+ port link-mode route
+ description unusedPort
+ shutdown
+ undo jumboframe enable
+ lldp compliance admin-status cdp txrx
+ sflow flow collector 1
+ sflow sampling-rate 2000
+ qos trust dscp
+ qos wrr weight
+ qos wrr ef group sp
+ qos wrr cs6 group sp
+ qos wrr cs7 group sp
+#
+interface Ten-GigabitEthernet2/0/14
+ port link-mode route
+ description unusedPort
+ shutdown
+ undo jumboframe enable
+ lldp compliance admin-status cdp txrx
+ sflow flow collector 1
+ sflow sampling-rate 2000
+ qos trust dscp
+ qos wrr weight
+ qos wrr ef group sp
+ qos wrr cs6 group sp
+ qos wrr cs7 group sp
+#
+interface Ten-GigabitEthernet2/0/15
+ port link-mode route
+ description unusedPort
+ shutdown
+ undo jumboframe enable
+ lldp compliance admin-status cdp txrx
+ sflow flow collector 1
+ sflow sampling-rate 2000
+ qos trust dscp
+ qos wrr weight
+ qos wrr ef group sp
+ qos wrr cs6 group sp
+ qos wrr cs7 group sp
+#
+interface Ten-GigabitEthernet2/0/16
+ port link-mode route
+ description unusedPort
+ shutdown
+ undo jumboframe enable
+ lldp compliance admin-status cdp txrx
+ sflow flow collector 1
+ sflow sampling-rate 2000
+ qos trust dscp
+ qos wrr weight
+ qos wrr ef group sp
+ qos wrr cs6 group sp
+ qos wrr cs7 group sp
+#
+interface Ten-GigabitEthernet2/0/17
+ port link-mode route
+ description unusedPort
+ shutdown
+ undo jumboframe enable
+ lldp compliance admin-status cdp txrx
+ sflow flow collector 1
+ sflow sampling-rate 2000
+ qos trust dscp
+ qos wrr weight
+ qos wrr ef group sp
+ qos wrr cs6 group sp
+ qos wrr cs7 group sp
+#
+interface Ten-GigabitEthernet2/0/18
+ port link-mode route
+ description unusedPort
+ shutdown
+ undo jumboframe enable
+ lldp compliance admin-status cdp txrx
+ sflow flow collector 1
+ sflow sampling-rate 2000
+ qos trust dscp
+ qos wrr weight
+ qos wrr ef group sp
+ qos wrr cs6 group sp
+ qos wrr cs7 group sp
+#
+interface Ten-GigabitEthernet2/0/19
+ port link-mode route
+ description unusedPort
+ shutdown
+ undo jumboframe enable
+ lldp compliance admin-status cdp txrx
+ sflow flow collector 1
+ sflow sampling-rate 2000
+ qos trust dscp
+ qos wrr weight
+ qos wrr ef group sp
+ qos wrr cs6 group sp
+ qos wrr cs7 group sp
+#
+interface Ten-GigabitEthernet2/0/20
+ port link-mode route
+ description unusedPort
+ shutdown
+ undo jumboframe enable
+ lldp compliance admin-status cdp txrx
+ sflow flow collector 1
+ sflow sampling-rate 2000
+ qos trust dscp
+ qos wrr weight
+ qos wrr ef group sp
+ qos wrr cs6 group sp
+ qos wrr cs7 group sp
+#
+interface Ten-GigabitEthernet1/0/21
+#
+interface Ten-GigabitEthernet1/0/22
+#
+interface Ten-GigabitEthernet1/0/23
+ shutdown
+#
+interface Ten-GigabitEthernet1/0/24
+ shutdown
+#
+interface Ten-GigabitEthernet2/0/21
+#
+interface Ten-GigabitEthernet2/0/22
+#
+interface Ten-GigabitEthernet2/0/23
+#
+interface Ten-GigabitEthernet2/0/24
+#
+multicast routing
+#
+pim
+ static-rp 10.127.1.1 2028 preferred
+#
+ scheduler logfile size 16
+#
+line class aux
+ user-role network-admin
+#
+line class vty
+ user-role network-operator
+#
+line aux 0
+ authentication-mode scheme
+ user-role network-admin
+ user-role network-operator
+ command authorization
+#
+line aux 1
+ user-role network-admin
+#
+line vty 0 63
+ authentication-mode scheme
+ user-role network-operator
+ command authorization
+ command accounting
+#
+ ip route-static 10.255.254.7 32 10.255.250.206
+ ip route-static 10.255.254.53 32 10.255.250.197
+#
+ info-center synchronous
+ info-center logbuffer size 1024
+ info-center loghost source LoopBack0
+ info-center loghost 10.35.173.71
+ info-center loghost 10.35.173.72
+#
+ snmp-agent
+ snmp-agent local-engineid 800063A280BCEAFAA135D100000001
+ snmp-agent community read cipher $c$3$wgYKD1FMKLI8tEWEZ4vor8E99glzUsAtYZEW0Y/Jdw== acl 2006
+ snmp-agent community read cipher $c$3$gXfv1vDzhUOsfFZ6b4EY6m8R1tdKGFkYPYUv acl 2006
+ snmp-agent community write cipher $c$3$s+Tix8zd5jqykzuoXtBLwXkXBam6ETZ9vKzT acl 2006
+ snmp-agent sys-info contact S/N: CN49FFT061/ CN51FFT052
+ snmp-agent sys-info version v2c v3
+ snmp-agent target-host trap address udp-domain 10.35.173.81 params securityname nw1ropub v2c
+ snmp-agent trap source LoopBack0
+#
+ ssh server enable
+#
+ ntp-service enable
+ ntp-service source LoopBack0
+ ntp-service unicast-server 10.45.251.1 priority
+ ntp-service unicast-server 10.45.251.65
+#
+acl number 2006 name SNMP
+ rule 5 permit source 10.35.173.86 0
+ rule 10 permit source 10.35.173.81 0
+ rule 15 permit source 10.35.50.205 0
+ rule 20 permit source 10.35.173.71 0
+ rule 100 deny
+#
+acl number 2028 name RP_10.127.1.1
+ rule 10 deny source 224.0.1.39 0
+ rule 15 deny source 224.0.1.40 0
+ rule 25 permit
+#
+ header legal %
+Warning Notice!
+This a County of San Mateo computer system, which may be accessed and
+used only for authorized County business by authorized personnel.
+Unauthorized access or use of this computer system may subject violators
+to criminal, civil, and/or administrative action.
+All information on this computer system may be intercepted, recorded, read,
+copied, and disclosed by and to authorized personnel for official purposes,
+including criminal investigations. Such information includes sensitive data
+encrypted to comply with confidentiality and privacy requirements.
+Access or use of this computer system by any person, whether authorized
+or unauthorized, constitutes consent to these terms.
+There is no right of privacy in this system.
+%
+#
+hwtacacs scheme tacacs
+ primary authentication 10.35.173.77
+ primary authorization 10.35.173.77
+ primary accounting 10.35.173.77
+ secondary authentication 10.45.154.5
+ secondary authorization 10.45.154.5
+ secondary accounting 10.45.154.5
+ key authentication cipher $c$3$V5I6Tvd0GSjzEtzq9wE73uscnEtlt8jX
+ key authorization cipher $c$3$xt7xtUBAqr+gEJDw3BhE29LytiHjHz1l
+ key accounting cipher $c$3$d3mxyjYDL5rm98xJC1LwIc0AyBppjl7k
+ user-name-format without-domain
+ nas-ip 10.255.254.53
+#
+radius scheme system
+ user-name-format without-domain
+#
+domain system
+#
+domain tacacs
+ authentication login hwtacacs-scheme tacacs local
+ authorization login hwtacacs-scheme tacacs local
+ accounting login hwtacacs-scheme tacacs local
+ authorization command hwtacacs-scheme tacacs local
+ accounting command hwtacacs-scheme tacacs
+#
+ domain default enable tacacs
+#
+role name level-0
+ description Predefined level-0 role
+#
+role name level-1
+ description Predefined level-1 role
+#
+role name level-2
+ description Predefined level-2 role
+#
+role name level-3
+ description Predefined level-3 role
+#
+role name level-4
+ description Predefined level-4 role
+#
+role name level-5
+ description Predefined level-5 role
+#
+role name level-6
+ description Predefined level-6 role
+#
+role name level-7
+ description Predefined level-7 role
+#
+role name level-8
+ description Predefined level-8 role
+#
+role name level-9
+ description Predefined level-9 role
+#
+role name level-10
+ description Predefined level-10 role
+#
+role name level-11
+ description Predefined level-11 role
+#
+role name level-12
+ description Predefined level-12 role
+#
+role name level-13
+ description Predefined level-13 role
+#
+role name level-14
+ description Predefined level-14 role
+#
+user-group system
+#
+local-user emergency class manage
+ password hash $h$6$JCUHF0Ng4M0OlJSr$iZlyF944kBCafF3XtMdiMw4FouNS2bX7512yaI8ti/wtJhp8i65fea7qZWSRMLX3At/3DM4uePy7u6puBL2U2Q==
+ service-type ssh terminal
+ authorization-attribute user-role network-admin
+ authorization-attribute user-role network-operator
+#
+local-user smc class manage
+ password hash $h$6$be3/yKegiKlyDfD3$aLs/VvjYfkMgaVACPI9NoLE6UxvLlaJW6GO25m7QzC3GfSHzyYlAebvbdIuUQ980NzsM/c+p6j7CCSQumlFJFA==
+ service-type ftp
+ service-type ssh terminal
+ authorization-attribute user-role network-admin
+ authorization-attribute user-role network-operator
+#
+return

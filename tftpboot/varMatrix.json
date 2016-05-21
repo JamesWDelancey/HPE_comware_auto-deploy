@@ -1,0 +1,32 @@
+{
+    "2c233ab2d124": {
+        "irfDomain": "1", 
+        "sflowCollector": "1.1.1.1", 
+        "loopbackIp": "1.1.1.1", 
+        "Northbound_IP": "10.1.1.1", 
+        "fanDirection": "port-to-power", 
+        "Switch Name": "DPW-ALPHA-255-1", 
+        "routerId": "1.1.1.1", 
+        "irf-port 2/1": null, 
+        "irf-port 2/2": [
+            "Ten-GigabitEthernet1/0/23", 
+            "Ten-GigabitEthernet1/0/24"
+        ], 
+        "IRF": "1", 
+        "Southbound_IP": "10.1.1.5", 
+        "VLANs": {
+            "IP": "10.1.1.1", 
+            "IP_Helper": [
+                "1.1.1.1", 
+                "1.1.1.2"
+            ], 
+            "Name": "Aruba Wireless", 
+            "Subnet": "255.255.255.0"
+        }, 
+        "irf-port 1/2": null, 
+        "irf-port 1/1": [
+            "Ten-GigabitEthernet1/0/23", 
+            "Ten-GigabitEthernet1/0/24"
+        ]
+    }
+}
