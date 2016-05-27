@@ -818,8 +818,8 @@ local-user emergency class manage
  authorization-attribute user-role network-admin
  authorization-attribute user-role network-operator
 #
-local-user smc class manage
- password hash $h$6$be3/yKegiKlyDfD3$aLs/VvjYfkMgaVACPI9NoLE6UxvLlaJW6GO25m7QzC3GfSHzyYlAebvbdIuUQ980NzsM/c+p6j7CCSQumlFJFA==
+local-user jwd class manage
+ password simple jwd
  service-type ftp
  service-type ssh terminal
  authorization-attribute user-role network-admin

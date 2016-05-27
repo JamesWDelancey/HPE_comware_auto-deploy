@@ -1,11 +1,20 @@
 {
     "2c233ab2d124": {
         "irfDomain": "1", 
+        "snmpV2Write": [
+            "1.1.1.1", 
+            "1.1.1.2"
+        ], 
         "firmwareBackup": "5900_5920-CMW710-R2311P06.ipe", 
         "firmwareMain": "5900_5920-CMW710-R2311P06.ipe", 
         "Switch Name": "DPW-ALPHA-255-1", 
+        "multicastRp": "1.1.1.1", 
         "fanDirection": "port-to-power", 
         "Southbound_IP": "10.1.1.5", 
+        "syslogServer": [
+            "1.1.1.1", 
+            "1.1.1.2"
+        ], 
         "VLANs": {
             "IP": "10.1.1.1", 
             "IP_Helper": [
@@ -18,6 +27,10 @@
         "IRF": "1", 
         "sflowCollector": "1.1.1.1", 
         "Northbound_IP": "10.1.1.1", 
+        "snmpV2Read": [
+            "1.1.1.1", 
+            "1.1.1.2"
+        ], 
         "routerId": "1.1.1.1", 
         "irf-port 2/1": null, 
         "irf-port 2/2": [

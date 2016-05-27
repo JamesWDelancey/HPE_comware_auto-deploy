@@ -1,16 +1,14 @@
 import os
 import sys
 import json
-import comware
 
-
-filename2 ='flash:/varMatrix.json'
+filename2 ='varMatrix.json'
 fin2=open(filename2,'r')
 switchList=json.loads(fin2.read())
-fin2.close()
-#print(switchList)
+#fin2.close()
+print(switchList)
 for switch in switchList:
-    filename ='flash:/template.txt'
+    filename ='template.txt'
     fin=open(filename,'r')
     data=fin.readlines()
     for i in data:

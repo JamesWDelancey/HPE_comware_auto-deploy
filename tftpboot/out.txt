@@ -1,7 +1,7 @@
 #
  version 7.1.045, Release 2311P06
 #
- sysname {{ switchList[switch]["Switch Name"] }}
+ sysname DPW-ALPHA-255-1
 #
  clock timezone PST minus 08:00:00
  clock summer-time PDT 02:00:00 March second Sunday 02:00:00 November first Sunday 01:00:00
@@ -10,14 +10,14 @@
 #
  telnet server enable
 #
- irf domain {{ switchList[switch]["irfDomain"] }}
+ irf domain 1
  irf mac-address persistent timer
  irf auto-update enable
  undo irf link-delay
  irf member 1 priority 32
  irf member 2 priority 31
 #
-ospf 1 router-id {{ switchList[switch]['routerId'] }}
+ospf 1 router-id 1.1.1.1
  bandwidth-reference 100000
  enable link-local-signaling
  enable out-of-band-resynchronization
@@ -35,9 +35,9 @@ ospf 1 router-id {{ switchList[switch]['routerId'] }}
  ip unreachables enable
  ip ttl-expires enable
 #
- sflow agent ip {{ switchList[switch]['loopbackIp'] }}
- sflow source ip {{ switchList[switch]['loopbackIp'] }}
- sflow collector 1 ip {{ switchList[switch]['sflowCollector'] }} description "CLI Collector"
+ sflow agent ip 1.1.1.1
+ sflow source ip 1.1.1.1
+ sflow collector 1 ip 1.1.1.1 description 'CLI Collector'
 #
  lldp global enable
  lldp compliance cdp
@@ -45,26 +45,26 @@ ospf 1 router-id {{ switchList[switch]['routerId'] }}
  burst-mode enable
 #
  system-working-mode standard
- fan prefer-direction slot 1 {{ switchList[switch]['fanDirection'] }}
- fan prefer-direction slot 2 {{ switchList[switch]['fanDirection'] }}
+ fan prefer-direction slot 1 port-to-power
+ fan prefer-direction slot 2 port-to-power
  password-recovery enable
 #
 vlan 1
 #
 irf-port 1/1
- port group interface {{ switchList[switch]['irf-port 1/1'][0] }}
- port group interface {{ switchList[switch]['irf-port 1/1'][1] }}
+ port group interface Ten-GigabitEthernet1/0/23
+ port group interface Ten-GigabitEthernet1/0/24
 #
 irf-port 1/2
 #
 irf-port 2/1
 #
 irf-port 2/2
- port group interface {{ switchList[switch]['irf-port 2/2'][0] }}
- port group interface {{ switchList[switch]['irf-port 2/2'][1] }}
+ port group interface Ten-GigabitEthernet1/0/23
+ port group interface Ten-GigabitEthernet1/0/24
 #
 stp region-configuration
- region-name {{ switchList[switch]['Switch Name'] }}
+ region-name DPW-ALPHA-255-1
  revision-level 1
  active region-configuration
 #
@@ -91,7 +91,7 @@ interface Route-Aggregation2
 interface NULL0
 #
 interface LoopBack0
- ip address {{ switchList[switch]['loopbackIp'] }} 255.255.255.255
+ ip address 1.1.1.1 255.255.255.255
 #
 interface M-GigabitEthernet0/0/0
  shutdown
@@ -671,7 +671,7 @@ interface Ten-GigabitEthernet2/0/24
 multicast routing
 #
 pim
- static-rp {{ switchList[switch]['multicastRp'] }} 2028 preferred
+ static-rp 1.1.1.1 2028 preferred
 #
  scheduler logfile size 16
 #
@@ -700,18 +700,18 @@ line vty 0 63
  info-center synchronous
  info-center logbuffer size 1024
  info-center loghost source LoopBack0
- info-center loghost {{ switchList[switch]['syslogServer'][0] }}
- info-center loghost {{ switchList[switch]['syslogServer'][1] }}
+ info-center loghost 1.1.1.1
+ info-center loghost 1.1.1.2
 #
  snmp-agent
  snmp-agent local-engineid 800063A280BCEAFAA135D100000001
- snmp-agent community read {{ switchList[switch]['snmpV2Read'][0] }} acl 2006
- snmp-agent community read {{ switchList[switch]['snmpV2Read'][1] }} acl 2006
- snmp-agent community write {{ switchList[switch]['snmpV2Write'][0] }} acl 2006
- snmp-agent community write {{ switchList[switch]['snmpV2Write'][1] }} acl 2006
+ snmp-agent community read 1.1.1.1 acl 2006
+ snmp-agent community read 1.1.1.2 acl 2006
+ snmp-agent community write 1.1.1.1 acl 2006
+ snmp-agent community write 1.1.1.2 acl 2006
  snmp-agent sys-info contact S/N: CN49FFT061/ CN51FFT052
  snmp-agent sys-info version v2c v3
- snmp-agent target-host trap address udp-domain 10.35.173.81 params securityname {{ switchList[switch]['snmpV2Read'][0] }} v2c
+ snmp-agent target-host trap address udp-domain 10.35.173.81 params securityname 1.1.1.1 v2c
  snmp-agent trap source LoopBack0
 #
  ssh server enable
@@ -749,7 +749,7 @@ hwtacacs scheme tacacs
  key authorization key123
  key accounting key123
  user-name-format without-domain
- nas-ip {{ switchList[switch]['loopbackIp'] }}
+ nas-ip 1.1.1.1
 #
 radius scheme system
  user-name-format without-domain
