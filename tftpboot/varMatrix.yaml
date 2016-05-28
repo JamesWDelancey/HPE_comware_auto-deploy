@@ -1,24 +1,25 @@
 ---
   2c233ab2d124:
-    Switch Name: DPW-ALPHA-255-1
+    Switch Name: TOR1
+    tftpServer: 10.1.1.1
     firmwareMain: 5900_5920-CMW710-R2311P06.ipe
     firmwareBackup: 5900_5920-CMW710-R2311P06.ipe
     IRF: "1"
     irfDomain: "1"
-    routerId: 1.1.1.1
-    sflowCollector: 1.1.1.1
+    sflowCollector: 100.114.64.2
     multicastRp: 1.1.1.1
     fanDirection: port-to-power
-    routerId: 1.1.1.1
-    loopbackIp: 1.1.1.1
+    loopbackIp: 100.114.254.1
+    alphaSpineIp: 100.114.64.2
+    bravoSpineIp: 100.114.68.2
     irf-port 1/1:
       - Ten-GigabitEthernet1/0/23
       - Ten-GigabitEthernet1/0/24
     irf-port 1/2:
     irf-port 2/1:
     irf-port 2/2:
-      - Ten-GigabitEthernet1/0/23
-      - Ten-GigabitEthernet1/0/24
+      - Ten-GigabitEthernet2/0/23
+      - Ten-GigabitEthernet2/0/24
     syslogServer:
       - 1.1.1.1
       - 1.1.1.2
@@ -28,13 +29,394 @@
     snmpV2Write:
       - 1.1.1.1
       - 1.1.1.2
-    Northbound_IP: 10.1.1.1
-    Southbound_IP: 10.1.1.5
-    VLANs:
-      Name: Aruba Wireless
-      IP: 10.1.1.1
-      Subnet: 255.255.255.0
-      IP_Helper:
-        - 1.1.1.1
-        - 1.1.1.2
+  2c233ab2d4f3:
+    Switch Name: TOR1
+    tftpServer: 10.1.1.1
+    firmwareMain: 5900_5920-CMW710-R2311P06.ipe
+    firmwareBackup: 5900_5920-CMW710-R2311P06.ipe
+    IRF: "2"
+    irfDomain: "1"
+    sflowCollector: 100.114.64.2
+    multicastRp: 1.1.1.1
+    fanDirection: port-to-power
+    loopbackIp: 100.114.254.1
+    alphaSpineIp: 100.114.64.2
+    bravoSpineIp: 100.114.68.2
+    irf-port 1/1:
+      - Ten-GigabitEthernet1/0/23
+      - Ten-GigabitEthernet1/0/24
+    irf-port 1/2:
+    irf-port 2/1:
+    irf-port 2/2:
+      - Ten-GigabitEthernet2/0/23
+      - Ten-GigabitEthernet2/0/24
+    syslogServer:
+      - 1.1.1.1
+      - 1.1.1.2
+    snmpV2Read:
+      - 1.1.1.1
+      - 1.1.1.2
+    snmpV2Write:
+      - 1.1.1.1
+      - 1.1.1.2
 
+  2c233ab2e470:
+    Switch Name: TOR2
+    tftpServer: 10.1.1.1
+    firmwareMain: 5900_5920-CMW710-R2311P06.ipe
+    firmwareBackup: 5900_5920-CMW710-R2311P06.ipe
+    IRF: "1"
+    irfDomain: "2"
+    sflowCollector: 100.114.64.2
+    multicastRp: 1.1.1.1
+    fanDirection: port-to-power
+    loopbackIp: 100.114.254.2
+    alphaSpineIp: 100.114.64.6
+    bravoSpineIp: 100.114.68.6
+    irf-port 1/1:
+      - Ten-GigabitEthernet1/0/23
+      - Ten-GigabitEthernet1/0/24
+    irf-port 1/2:
+    irf-port 2/1:
+    irf-port 2/2:
+      - Ten-GigabitEthernet2/0/23
+      - Ten-GigabitEthernet2/0/24
+    syslogServer:
+      - 1.1.1.1
+      - 1.1.1.2
+    snmpV2Read:
+      - 1.1.1.1
+      - 1.1.1.2
+    snmpV2Write:
+      - 1.1.1.1
+      - 1.1.1.2
+  5c8a38b0c87e:
+    Switch Name: TOR2
+    tftpServer: 10.1.1.1
+    firmwareMain: 5900_5920-CMW710-R2311P06.ipe
+    firmwareBackup: 5900_5920-CMW710-R2311P06.ipe
+    IRF: "2"
+    irfDomain: "2"
+    sflowCollector: 100.114.64.2
+    multicastRp: 1.1.1.1
+    fanDirection: port-to-power
+    loopbackIp: 100.114.254.2
+    alphaSpineIp: 100.114.64.6
+    bravoSpineIp: 100.114.68.6
+    irf-port 1/1:
+      - Ten-GigabitEthernet1/0/23
+      - Ten-GigabitEthernet1/0/24
+    irf-port 1/2:
+    irf-port 2/1:
+    irf-port 2/2:
+      - Ten-GigabitEthernet2/0/23
+      - Ten-GigabitEthernet2/0/24
+    syslogServer:
+      - 1.1.1.1
+      - 1.1.1.2
+    snmpV2Read:
+      - 1.1.1.1
+      - 1.1.1.2
+    snmpV2Write:
+      - 1.1.1.1
+      - 1.1.1.2
+  2c233a4e7e1f:
+    Switch Name: TOR3
+    tftpServer: 10.1.1.1
+    firmwareMain: 5900_5920-CMW710-R2311P06.ipe
+    firmwareBackup: 5900_5920-CMW710-R2311P06.ipe
+    IRF: "1"
+    irfDomain: "3"
+    sflowCollector: 100.114.64.2
+    multicastRp: 1.1.1.1
+    fanDirection: port-to-power
+    loopbackIp: 100.114.254.3
+    alphaSpineIp: 100.114.64.10
+    bravoSpineIp: 100.114.68.10
+    irf-port 1/1:
+      - Ten-GigabitEthernet1/0/23
+      - Ten-GigabitEthernet1/0/24
+    irf-port 1/2:
+    irf-port 2/1:
+    irf-port 2/2:
+      - Ten-GigabitEthernet2/0/23
+      - Ten-GigabitEthernet2/0/24
+    syslogServer:
+      - 1.1.1.1
+      - 1.1.1.2
+    snmpV2Read:
+      - 1.1.1.1
+      - 1.1.1.2
+    snmpV2Write:
+      - 1.1.1.1
+      - 1.1.1.2
+  5c8a384d38aa:
+    Switch Name: TOR3
+    tftpServer: 10.1.1.1
+    firmwareMain: 5900_5920-CMW710-R2311P06.ipe
+    firmwareBackup: 5900_5920-CMW710-R2311P06.ipe
+    IRF: "2"
+    irfDomain: "3"
+    sflowCollector: 100.114.64.2
+    multicastRp: 1.1.1.1
+    fanDirection: port-to-power
+    loopbackIp: 100.114.254.3
+    alphaSpineIp: 100.114.64.10
+    bravoSpineIp: 100.114.68.10
+    irf-port 1/1:
+      - Ten-GigabitEthernet1/0/23
+      - Ten-GigabitEthernet1/0/24
+    irf-port 1/2:
+    irf-port 2/1:
+    irf-port 2/2:
+      - Ten-GigabitEthernet2/0/23
+      - Ten-GigabitEthernet2/0/24
+    syslogServer:
+      - 1.1.1.1
+      - 1.1.1.2
+    snmpV2Read:
+      - 1.1.1.1
+      - 1.1.1.2
+    snmpV2Write:
+      - 1.1.1.1
+      - 1.1.1.2
+  2c233ab2df1b:
+    Switch Name: TOR4
+    tftpServer: 10.1.1.1
+    firmwareMain: 5900_5920-CMW710-R2311P06.ipe
+    firmwareBackup: 5900_5920-CMW710-R2311P06.ipe
+    IRF: "1"
+    irfDomain: "4"
+    sflowCollector: 100.114.64.2
+    multicastRp: 1.1.1.1
+    fanDirection: port-to-power
+    loopbackIp: 100.114.254.4
+    alphaSpineIp: 100.114.64.14
+    bravoSpineIp: 100.114.68.14
+    irf-port 1/1:
+      - Ten-GigabitEthernet1/0/23
+      - Ten-GigabitEthernet1/0/24
+    irf-port 1/2:
+    irf-port 2/1:
+    irf-port 2/2:
+      - Ten-GigabitEthernet2/0/23
+      - Ten-GigabitEthernet2/0/24
+    syslogServer:
+      - 1.1.1.1
+      - 1.1.1.2
+    snmpV2Read:
+      - 1.1.1.1
+      - 1.1.1.2
+    snmpV2Write:
+      - 1.1.1.1
+      - 1.1.1.2
+  2c233a4e81ad:
+    Switch Name: TOR4
+    tftpServer: 10.1.1.1
+    firmwareMain: 5900_5920-CMW710-R2311P06.ipe
+    firmwareBackup: 5900_5920-CMW710-R2311P06.ipe
+    IRF: "2"
+    irfDomain: "4"
+    sflowCollector: 100.114.64.2
+    multicastRp: 1.1.1.1
+    fanDirection: port-to-power
+    loopbackIp: 100.114.254.4
+    alphaSpineIp: 100.114.64.14
+    bravoSpineIp: 100.114.68.14
+    irf-port 1/1:
+      - Ten-GigabitEthernet1/0/23
+      - Ten-GigabitEthernet1/0/24
+    irf-port 1/2:
+    irf-port 2/1:
+    irf-port 2/2:
+      - Ten-GigabitEthernet2/0/23
+      - Ten-GigabitEthernet2/0/24
+    syslogServer:
+      - 1.1.1.1
+      - 1.1.1.2
+    snmpV2Read:
+      - 1.1.1.1
+      - 1.1.1.2
+    snmpV2Write:
+      - 1.1.1.1
+      - 1.1.1.2
+  2c233ab2e2ea:
+    Switch Name: TOR5
+    tftpServer: 10.1.1.1
+    firmwareMain: 5900_5920-CMW710-R2311P06.ipe
+    firmwareBackup: 5900_5920-CMW710-R2311P06.ipe
+    IRF: "1"
+    irfDomain: "5"
+    sflowCollector: 100.114.64.2
+    multicastRp: 1.1.1.1
+    fanDirection: port-to-power
+    loopbackIp: 100.114.254.5
+    alphaSpineIp: 100.114.64.18
+    bravoSpineIp: 100.114.68.18
+    irf-port 1/1:
+      - Ten-GigabitEthernet1/0/23
+      - Ten-GigabitEthernet1/0/24
+    irf-port 1/2:
+    irf-port 2/1:
+    irf-port 2/2:
+      - Ten-GigabitEthernet2/0/23
+      - Ten-GigabitEthernet2/0/24
+    syslogServer:
+      - 1.1.1.1
+      - 1.1.1.2
+    snmpV2Read:
+      - 1.1.1.1
+      - 1.1.1.2
+    snmpV2Write:
+      - 1.1.1.1
+      - 1.1.1.2
+  2c233a5b72c8:
+    Switch Name: TOR5
+    tftpServer: 10.1.1.1
+    firmwareMain: 5900_5920-CMW710-R2311P06.ipe
+    firmwareBackup: 5900_5920-CMW710-R2311P06.ipe
+    IRF: "2"
+    irfDomain: "5"
+    sflowCollector: 100.114.64.2
+    multicastRp: 1.1.1.1
+    fanDirection: port-to-power
+    loopbackIp: 100.114.254.5
+    alphaSpineIp: 100.114.64.18
+    bravoSpineIp: 100.114.68.18
+    irf-port 1/1:
+      - Ten-GigabitEthernet1/0/23
+      - Ten-GigabitEthernet1/0/24
+    irf-port 1/2:
+    irf-port 2/1:
+    irf-port 2/2:
+      - Ten-GigabitEthernet2/0/23
+      - Ten-GigabitEthernet2/0/24
+    syslogServer:
+      - 1.1.1.1
+      - 1.1.1.2
+    snmpV2Read:
+      - 1.1.1.1
+      - 1.1.1.2
+    snmpV2Write:
+      - 1.1.1.1
+      - 1.1.1.2
+  2c233ab2e2a9:
+    Switch Name: TOR6
+    tftpServer: 10.1.1.1
+    firmwareMain: 5900_5920-CMW710-R2311P06.ipe
+    firmwareBackup: 5900_5920-CMW710-R2311P06.ipe
+    IRF: "1"
+    irfDomain: "6"
+    sflowCollector: 100.114.64.2
+    multicastRp: 1.1.1.1
+    fanDirection: port-to-power
+    loopbackIp: 100.114.254.6
+    alphaSpineIp: 100.114.64.22
+    bravoSpineIp: 100.114.68.22
+    irf-port 1/1:
+      - Ten-GigabitEthernet1/0/23
+      - Ten-GigabitEthernet1/0/24
+    irf-port 1/2:
+    irf-port 2/1:
+    irf-port 2/2:
+      - Ten-GigabitEthernet2/0/23
+      - Ten-GigabitEthernet2/0/24
+    syslogServer:
+      - 1.1.1.1
+      - 1.1.1.2
+    snmpV2Read:
+      - 1.1.1.1
+      - 1.1.1.2
+    snmpV2Write:
+      - 1.1.1.1
+      - 1.1.1.2
+  5c8a38b0ba05:
+    Switch Name: TOR6
+    tftpServer: 10.1.1.1
+    firmwareMain: 5900_5920-CMW710-R2311P06.ipe
+    firmwareBackup: 5900_5920-CMW710-R2311P06.ipe
+    IRF: "2"
+    irfDomain: "6"
+    sflowCollector: 100.114.64.2
+    multicastRp: 1.1.1.1
+    fanDirection: port-to-power
+    loopbackIp: 100.114.254.6
+    alphaSpineIp: 100.114.64.22
+    bravoSpineIp: 100.114.68.22
+    irf-port 1/1:
+      - Ten-GigabitEthernet1/0/23
+      - Ten-GigabitEthernet1/0/24
+    irf-port 1/2:
+    irf-port 2/1:
+    irf-port 2/2:
+      - Ten-GigabitEthernet2/0/23
+      - Ten-GigabitEthernet2/0/24
+    syslogServer:
+      - 1.1.1.1
+      - 1.1.1.2
+    snmpV2Read:
+      - 1.1.1.1
+      - 1.1.1.2
+    snmpV2Write:
+      - 1.1.1.1
+      - 1.1.1.2
+  2c233a5b744e:
+    Switch Name: SpineAlpha
+    tftpServer: 10.1.1.1
+    firmwareMain: 5900_5920-CMW710-R2311P06.ipe
+    firmwareBackup: 5900_5920-CMW710-R2311P06.ipe
+    IRF: "1"
+    irfDomain: "6"
+    sflowCollector: 100.114.64.2
+    multicastRp: 1.1.1.1
+    fanDirection: port-to-power
+    loopbackIp: 100.114.254.11
+    alphaSpineIp: 100.114.64.32
+    bravoSpineIp: 100.114.68.32
+    irf-port 1/1:
+      - Ten-GigabitEthernet1/0/23
+      - Ten-GigabitEthernet1/0/24
+    irf-port 1/2:
+    irf-port 2/1:
+    irf-port 2/2:
+      - Ten-GigabitEthernet2/0/23
+      - Ten-GigabitEthernet2/0/24
+    syslogServer:
+      - 1.1.1.1
+      - 1.1.1.2
+    snmpV2Read:
+      - 1.1.1.1
+      - 1.1.1.2
+    snmpV2Write:
+      - 1.1.1.1
+      - 1.1.1.2
+  5c8a384d255e:
+    Switch Name: SpineBravo
+    tftpServer: 10.1.1.1
+    firmwareMain: 5900_5920-CMW710-R2311P06.ipe
+    firmwareBackup: 5900_5920-CMW710-R2311P06.ipe
+    IRF: "1"
+    irfDomain: "6"
+    sflowCollector: 100.114.64.2
+    multicastRp: 1.1.1.1
+    fanDirection: port-to-power
+    loopbackIp: 100.114.254.12
+    alphaSpineIp: 100.114.64.42
+    bravoSpineIp: 100.114.68.42
+    irf-port 1/1:
+      - Ten-GigabitEthernet1/0/23
+      - Ten-GigabitEthernet1/0/24
+    irf-port 1/2:
+    irf-port 2/1:
+    irf-port 2/2:
+      - Ten-GigabitEthernet2/0/23
+      - Ten-GigabitEthernet2/0/24
+    syslogServer:
+      - 1.1.1.1
+      - 1.1.1.2
+    snmpV2Read:
+      - 1.1.1.1
+      - 1.1.1.2
+    snmpV2Write:
+      - 1.1.1.1
+      - 1.1.1.2

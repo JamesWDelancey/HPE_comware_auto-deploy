@@ -17,20 +17,13 @@
  irf member 1 priority 32
  irf member 2 priority 31
 #
-ospf 1 router-id {{ switchList[switch]['routerId'] }}
+ospf 1 router-id {{ switchList[switch]['loopbackIp'] }}
  bandwidth-reference 100000
  enable link-local-signaling
  enable out-of-band-resynchronization
  graceful-restart ietf
  area 0.0.0.0
-  network 10.250.254.53 0.0.0.0
-  network 10.255.250.201 0.0.0.0
-  network 10.255.250.205 0.0.0.0
-  network 10.255.250.209 0.0.0.0
-  network 10.255.254.53 0.0.0.0
-
- area 0.0.0.7
-  network 10.255.250.194 0.0.0.0
+  network 100.114.64.0 0.0.255.255
 #
  ip unreachables enable
  ip ttl-expires enable
@@ -74,7 +67,7 @@ stp region-configuration
 #
 interface Route-Aggregation1
  description To HP Spine Alpha
- ip address 10.255.250.194 255.255.255.252
+ ip address {{ switchList[switch]['alphaSpineIp'] }} 255.255.255.252
  ospf authentication-mode md5 1 cipher $c$3$RQJFiSEy0r3G5PR2LjA9AZOSfCND498t6rtF2gkO
  ospf network-type p2p
  pim sm
@@ -82,7 +75,7 @@ interface Route-Aggregation1
 #
 interface Route-Aggregation2
  description To HP Spine Bravo
- ip address 10.255.250.205 255.255.255.252
+ ip address {{ switchList[switch]['bravoSpineIp'] }} 255.255.255.252
  ospf authentication-mode md5 1 cipher $c$3$RQJFiSEy0r3G5PR2LjA9AZOSfCND498t6rtF2gkO
  ospf network-type p2p
  pim sm
@@ -151,7 +144,10 @@ interface Ten-GigabitEthernet1/0/4
 interface Ten-GigabitEthernet1/0/5
  port link-mode route
  description unusedPort
- shutdown
+ ip address 100.114.64.1 255.255.255.252
+ ospf authentication-mode md5 1 cipher $c$3$RQJFiSEy0r3G5PR2LjA9AZOSfCND498t6rtF2gkO
+ ospf network-type p2p
+ pim sm
  undo jumboframe enable
  lldp compliance admin-status cdp txrx
  sflow flow collector 1
@@ -165,7 +161,10 @@ interface Ten-GigabitEthernet1/0/5
 interface Ten-GigabitEthernet1/0/6
  port link-mode route
  description unusedPort
- shutdown
+ ip address 100.114.64.5 255.255.255.252
+ ospf authentication-mode md5 1 cipher $c$3$RQJFiSEy0r3G5PR2LjA9AZOSfCND498t6rtF2gkO
+ ospf network-type p2p
+ pim sm
  undo jumboframe enable
  lldp compliance admin-status cdp txrx
  sflow flow collector 1
@@ -179,7 +178,10 @@ interface Ten-GigabitEthernet1/0/6
 interface Ten-GigabitEthernet1/0/7
  port link-mode route
  description unusedPort
- shutdown
+ ip address 100.114.64.9 255.255.255.252
+ ospf authentication-mode md5 1 cipher $c$3$RQJFiSEy0r3G5PR2LjA9AZOSfCND498t6rtF2gkO
+ ospf network-type p2p
+ pim sm
  undo jumboframe enable
  lldp compliance admin-status cdp txrx
  sflow flow collector 1
@@ -193,7 +195,10 @@ interface Ten-GigabitEthernet1/0/7
 interface Ten-GigabitEthernet1/0/8
  port link-mode route
  description unusedPort
- shutdown
+ ip address 100.114.64.13 255.255.255.252
+ ospf authentication-mode md5 1 cipher $c$3$RQJFiSEy0r3G5PR2LjA9AZOSfCND498t6rtF2gkO
+ ospf network-type p2p
+ pim sm
  undo jumboframe enable
  lldp compliance admin-status cdp txrx
  sflow flow collector 1
@@ -207,7 +212,10 @@ interface Ten-GigabitEthernet1/0/8
 interface Ten-GigabitEthernet1/0/9
  port link-mode route
  description unusedPort
- shutdown
+ ip address 100.114.64.17 255.255.255.252
+ ospf authentication-mode md5 1 cipher $c$3$RQJFiSEy0r3G5PR2LjA9AZOSfCND498t6rtF2gkO
+ ospf network-type p2p
+ pim sm
  undo jumboframe enable
  lldp compliance admin-status cdp txrx
  sflow flow collector 1
@@ -221,7 +229,10 @@ interface Ten-GigabitEthernet1/0/9
 interface Ten-GigabitEthernet1/0/10
  port link-mode route
  description unusedPort
- shutdown
+ ip address 100.114.64.21 255.255.255.252
+ ospf authentication-mode md5 1 cipher $c$3$RQJFiSEy0r3G5PR2LjA9AZOSfCND498t6rtF2gkO
+ ospf network-type p2p
+ pim sm
  undo jumboframe enable
  lldp compliance admin-status cdp txrx
  sflow flow collector 1
@@ -709,23 +720,20 @@ line vty 0 63
  snmp-agent community read {{ switchList[switch]['snmpV2Read'][1] }} acl 2006
  snmp-agent community write {{ switchList[switch]['snmpV2Write'][0] }} acl 2006
  snmp-agent community write {{ switchList[switch]['snmpV2Write'][1] }} acl 2006
- snmp-agent sys-info contact S/N: CN49FFT061/ CN51FFT052
+ snmp-agent sys-info contact S/N: CN49FFasdf/ CN51FFasdf
  snmp-agent sys-info version v2c v3
- snmp-agent target-host trap address udp-domain 10.35.173.81 params securityname {{ switchList[switch]['snmpV2Read'][0] }} v2c
+ snmp-agent target-host trap address udp-domain 100.114.64.1 params securityname {{ switchList[switch]['snmpV2Read'][0] }} v2c
  snmp-agent trap source LoopBack0
 #
  ssh server enable
 #
  ntp-service enable
  ntp-service source LoopBack0
- ntp-service unicast-server 10.45.251.1 priority
- ntp-service unicast-server 10.45.251.65
+ ntp-service unicast-server 100.114.64.1 priority
+ ntp-service unicast-server 100.114.64.65
 #
 acl number 2006 name SNMP
- rule 5 permit source 10.35.173.86 0
- rule 10 permit source 10.35.173.81 0
- rule 15 permit source 10.35.50.205 0
- rule 20 permit source 10.35.173.71 0
+ rule 5 permit source 100.114.64.1 0
  rule 100 deny
 #
 acl number 2028 name RP_10.127.1.1
@@ -739,12 +747,12 @@ There is no right of privacy in this system.
 %
 #
 hwtacacs scheme tacacs
- primary authentication 1.1.1.1
- primary authorization 1.1.1.1
- primary accounting 1.1.1.1
- secondary authentication 1.1.1.2
- secondary authorization 1.1.1.2
- secondary accounting 1.1.1.2
+ primary authentication 100.114.64.1
+ primary authorization 100.114.64.1
+ primary accounting 100.114.64.1
+ secondary authentication 100.114.65.2
+ secondary authorization 100.114.65.2
+ secondary accounting 100.114.65.2
  key authentication key123
  key authorization key123
  key accounting key123
@@ -812,14 +820,8 @@ role name level-14
 #
 user-group system
 #
-local-user emergency class manage
- password hash $h$6$JCUHF0Ng4M0OlJSr$iZlyF944kBCafF3XtMdiMw4FouNS2bX7512yaI8ti/wtJhp8i65fea7qZWSRMLX3At/3DM4uePy7u6puBL2U2Q==
- service-type ssh terminal
- authorization-attribute user-role network-admin
- authorization-attribute user-role network-operator
-#
-local-user smc class manage
- password hash $h$6$be3/yKegiKlyDfD3$aLs/VvjYfkMgaVACPI9NoLE6UxvLlaJW6GO25m7QzC3GfSHzyYlAebvbdIuUQ980NzsM/c+p6j7CCSQumlFJFA==
+local-user HPE class manage
+ password simple jamesdelancey
  service-type ftp
  service-type ssh terminal
  authorization-attribute user-role network-admin

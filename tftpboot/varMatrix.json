@@ -1,43 +1,502 @@
 {
-    "2c233ab2d124": {
-        "irfDomain": "1", 
+    "5c8a384d38aa": {
+        "irfDomain": "3", 
+        "bravoSpineIp": "100.114.68.10", 
         "snmpV2Write": [
             "1.1.1.1", 
             "1.1.1.2"
         ], 
         "firmwareBackup": "5900_5920-CMW710-R2311P06.ipe", 
         "firmwareMain": "5900_5920-CMW710-R2311P06.ipe", 
-        "Switch Name": "DPW-ALPHA-255-1", 
+        "Switch Name": "TOR3", 
         "multicastRp": "1.1.1.1", 
-        "fanDirection": "port-to-power", 
-        "Southbound_IP": "10.1.1.5", 
+        "alphaSpineIp": "100.114.64.10", 
+        "tftpServer": "10.1.1.1", 
         "syslogServer": [
             "1.1.1.1", 
             "1.1.1.2"
         ], 
-        "VLANs": {
-            "IP": "10.1.1.1", 
-            "IP_Helper": [
-                "1.1.1.1", 
-                "1.1.1.2"
-            ], 
-            "Name": "Aruba Wireless", 
-            "Subnet": "255.255.255.0"
-        }, 
-        "IRF": "1", 
-        "sflowCollector": "1.1.1.1", 
-        "Northbound_IP": "10.1.1.1", 
+        "IRF": "2", 
+        "sflowCollector": "100.114.64.2", 
+        "fanDirection": "port-to-power", 
         "snmpV2Read": [
             "1.1.1.1", 
             "1.1.1.2"
         ], 
-        "routerId": "1.1.1.1", 
         "irf-port 2/1": null, 
         "irf-port 2/2": [
+            "Ten-GigabitEthernet2/0/23", 
+            "Ten-GigabitEthernet2/0/24"
+        ], 
+        "loopbackIp": "100.114.254.3", 
+        "irf-port 1/2": null, 
+        "irf-port 1/1": [
             "Ten-GigabitEthernet1/0/23", 
             "Ten-GigabitEthernet1/0/24"
+        ]
+    }, 
+    "2c233ab2df1b": {
+        "irfDomain": "4", 
+        "bravoSpineIp": "100.114.68.14", 
+        "snmpV2Write": [
+            "1.1.1.1", 
+            "1.1.1.2"
         ], 
-        "loopbackIp": "1.1.1.1", 
+        "firmwareBackup": "5900_5920-CMW710-R2311P06.ipe", 
+        "firmwareMain": "5900_5920-CMW710-R2311P06.ipe", 
+        "Switch Name": "TOR4", 
+        "multicastRp": "1.1.1.1", 
+        "alphaSpineIp": "100.114.64.14", 
+        "tftpServer": "10.1.1.1", 
+        "syslogServer": [
+            "1.1.1.1", 
+            "1.1.1.2"
+        ], 
+        "IRF": "1", 
+        "sflowCollector": "100.114.64.2", 
+        "fanDirection": "port-to-power", 
+        "snmpV2Read": [
+            "1.1.1.1", 
+            "1.1.1.2"
+        ], 
+        "irf-port 2/1": null, 
+        "irf-port 2/2": [
+            "Ten-GigabitEthernet2/0/23", 
+            "Ten-GigabitEthernet2/0/24"
+        ], 
+        "loopbackIp": "100.114.254.4", 
+        "irf-port 1/2": null, 
+        "irf-port 1/1": [
+            "Ten-GigabitEthernet1/0/23", 
+            "Ten-GigabitEthernet1/0/24"
+        ]
+    }, 
+    "5c8a38b0c87e": {
+        "irfDomain": "2", 
+        "bravoSpineIp": "100.114.68.6", 
+        "snmpV2Write": [
+            "1.1.1.1", 
+            "1.1.1.2"
+        ], 
+        "firmwareBackup": "5900_5920-CMW710-R2311P06.ipe", 
+        "firmwareMain": "5900_5920-CMW710-R2311P06.ipe", 
+        "Switch Name": "TOR2", 
+        "multicastRp": "1.1.1.1", 
+        "alphaSpineIp": "100.114.64.6", 
+        "tftpServer": "10.1.1.1", 
+        "syslogServer": [
+            "1.1.1.1", 
+            "1.1.1.2"
+        ], 
+        "IRF": "2", 
+        "sflowCollector": "100.114.64.2", 
+        "fanDirection": "port-to-power", 
+        "snmpV2Read": [
+            "1.1.1.1", 
+            "1.1.1.2"
+        ], 
+        "irf-port 2/1": null, 
+        "irf-port 2/2": [
+            "Ten-GigabitEthernet2/0/23", 
+            "Ten-GigabitEthernet2/0/24"
+        ], 
+        "loopbackIp": "100.114.254.2", 
+        "irf-port 1/2": null, 
+        "irf-port 1/1": [
+            "Ten-GigabitEthernet1/0/23", 
+            "Ten-GigabitEthernet1/0/24"
+        ]
+    }, 
+    "2c233ab2e2a9": {
+        "irfDomain": "6", 
+        "bravoSpineIp": "100.114.68.22", 
+        "snmpV2Write": [
+            "1.1.1.1", 
+            "1.1.1.2"
+        ], 
+        "firmwareBackup": "5900_5920-CMW710-R2311P06.ipe", 
+        "firmwareMain": "5900_5920-CMW710-R2311P06.ipe", 
+        "Switch Name": "TOR6", 
+        "multicastRp": "1.1.1.1", 
+        "alphaSpineIp": "100.114.64.22", 
+        "tftpServer": "10.1.1.1", 
+        "syslogServer": [
+            "1.1.1.1", 
+            "1.1.1.2"
+        ], 
+        "IRF": "1", 
+        "sflowCollector": "100.114.64.2", 
+        "fanDirection": "port-to-power", 
+        "snmpV2Read": [
+            "1.1.1.1", 
+            "1.1.1.2"
+        ], 
+        "irf-port 2/1": null, 
+        "irf-port 2/2": [
+            "Ten-GigabitEthernet2/0/23", 
+            "Ten-GigabitEthernet2/0/24"
+        ], 
+        "loopbackIp": "100.114.254.6", 
+        "irf-port 1/2": null, 
+        "irf-port 1/1": [
+            "Ten-GigabitEthernet1/0/23", 
+            "Ten-GigabitEthernet1/0/24"
+        ]
+    }, 
+    "2c233ab2e470": {
+        "irfDomain": "2", 
+        "bravoSpineIp": "100.114.68.6", 
+        "snmpV2Write": [
+            "1.1.1.1", 
+            "1.1.1.2"
+        ], 
+        "firmwareBackup": "5900_5920-CMW710-R2311P06.ipe", 
+        "firmwareMain": "5900_5920-CMW710-R2311P06.ipe", 
+        "Switch Name": "TOR2", 
+        "multicastRp": "1.1.1.1", 
+        "alphaSpineIp": "100.114.64.6", 
+        "tftpServer": "10.1.1.1", 
+        "syslogServer": [
+            "1.1.1.1", 
+            "1.1.1.2"
+        ], 
+        "IRF": "1", 
+        "sflowCollector": "100.114.64.2", 
+        "fanDirection": "port-to-power", 
+        "snmpV2Read": [
+            "1.1.1.1", 
+            "1.1.1.2"
+        ], 
+        "irf-port 2/1": null, 
+        "irf-port 2/2": [
+            "Ten-GigabitEthernet2/0/23", 
+            "Ten-GigabitEthernet2/0/24"
+        ], 
+        "loopbackIp": "100.114.254.2", 
+        "irf-port 1/2": null, 
+        "irf-port 1/1": [
+            "Ten-GigabitEthernet1/0/23", 
+            "Ten-GigabitEthernet1/0/24"
+        ]
+    }, 
+    "2c233a4e81ad": {
+        "irfDomain": "4", 
+        "bravoSpineIp": "100.114.68.14", 
+        "snmpV2Write": [
+            "1.1.1.1", 
+            "1.1.1.2"
+        ], 
+        "firmwareBackup": "5900_5920-CMW710-R2311P06.ipe", 
+        "firmwareMain": "5900_5920-CMW710-R2311P06.ipe", 
+        "Switch Name": "TOR4", 
+        "multicastRp": "1.1.1.1", 
+        "alphaSpineIp": "100.114.64.14", 
+        "tftpServer": "10.1.1.1", 
+        "syslogServer": [
+            "1.1.1.1", 
+            "1.1.1.2"
+        ], 
+        "IRF": "2", 
+        "sflowCollector": "100.114.64.2", 
+        "fanDirection": "port-to-power", 
+        "snmpV2Read": [
+            "1.1.1.1", 
+            "1.1.1.2"
+        ], 
+        "irf-port 2/1": null, 
+        "irf-port 2/2": [
+            "Ten-GigabitEthernet2/0/23", 
+            "Ten-GigabitEthernet2/0/24"
+        ], 
+        "loopbackIp": "100.114.254.4", 
+        "irf-port 1/2": null, 
+        "irf-port 1/1": [
+            "Ten-GigabitEthernet1/0/23", 
+            "Ten-GigabitEthernet1/0/24"
+        ]
+    }, 
+    "5c8a384d255e": {
+        "irfDomain": "6", 
+        "bravoSpineIp": "100.114.68.42", 
+        "snmpV2Write": [
+            "1.1.1.1", 
+            "1.1.1.2"
+        ], 
+        "firmwareBackup": "5900_5920-CMW710-R2311P06.ipe", 
+        "firmwareMain": "5900_5920-CMW710-R2311P06.ipe", 
+        "Switch Name": "SpineBravo", 
+        "multicastRp": "1.1.1.1", 
+        "alphaSpineIp": "100.114.64.42", 
+        "tftpServer": "10.1.1.1", 
+        "syslogServer": [
+            "1.1.1.1", 
+            "1.1.1.2"
+        ], 
+        "IRF": "1", 
+        "sflowCollector": "100.114.64.2", 
+        "fanDirection": "port-to-power", 
+        "snmpV2Read": [
+            "1.1.1.1", 
+            "1.1.1.2"
+        ], 
+        "irf-port 2/1": null, 
+        "irf-port 2/2": [
+            "Ten-GigabitEthernet2/0/23", 
+            "Ten-GigabitEthernet2/0/24"
+        ], 
+        "loopbackIp": "100.114.254.12", 
+        "irf-port 1/2": null, 
+        "irf-port 1/1": [
+            "Ten-GigabitEthernet1/0/23", 
+            "Ten-GigabitEthernet1/0/24"
+        ]
+    }, 
+    "2c233ab2d4f3": {
+        "irfDomain": "1", 
+        "bravoSpineIp": "100.114.68.2", 
+        "snmpV2Write": [
+            "1.1.1.1", 
+            "1.1.1.2"
+        ], 
+        "firmwareBackup": "5900_5920-CMW710-R2311P06.ipe", 
+        "firmwareMain": "5900_5920-CMW710-R2311P06.ipe", 
+        "Switch Name": "TOR1", 
+        "multicastRp": "1.1.1.1", 
+        "alphaSpineIp": "100.114.64.2", 
+        "tftpServer": "10.1.1.1", 
+        "syslogServer": [
+            "1.1.1.1", 
+            "1.1.1.2"
+        ], 
+        "IRF": "2", 
+        "sflowCollector": "100.114.64.2", 
+        "fanDirection": "port-to-power", 
+        "snmpV2Read": [
+            "1.1.1.1", 
+            "1.1.1.2"
+        ], 
+        "irf-port 2/1": null, 
+        "irf-port 2/2": [
+            "Ten-GigabitEthernet2/0/23", 
+            "Ten-GigabitEthernet2/0/24"
+        ], 
+        "loopbackIp": "100.114.254.1", 
+        "irf-port 1/2": null, 
+        "irf-port 1/1": [
+            "Ten-GigabitEthernet1/0/23", 
+            "Ten-GigabitEthernet1/0/24"
+        ]
+    }, 
+    "2c233ab2d124": {
+        "irfDomain": "1", 
+        "bravoSpineIp": "100.114.68.2", 
+        "snmpV2Write": [
+            "1.1.1.1", 
+            "1.1.1.2"
+        ], 
+        "firmwareBackup": "5900_5920-CMW710-R2311P06.ipe", 
+        "firmwareMain": "5900_5920-CMW710-R2311P06.ipe", 
+        "Switch Name": "TOR1", 
+        "multicastRp": "1.1.1.1", 
+        "alphaSpineIp": "100.114.64.2", 
+        "tftpServer": "10.1.1.1", 
+        "syslogServer": [
+            "1.1.1.1", 
+            "1.1.1.2"
+        ], 
+        "IRF": "1", 
+        "sflowCollector": "100.114.64.2", 
+        "fanDirection": "port-to-power", 
+        "snmpV2Read": [
+            "1.1.1.1", 
+            "1.1.1.2"
+        ], 
+        "irf-port 2/1": null, 
+        "irf-port 2/2": [
+            "Ten-GigabitEthernet2/0/23", 
+            "Ten-GigabitEthernet2/0/24"
+        ], 
+        "loopbackIp": "100.114.254.1", 
+        "irf-port 1/2": null, 
+        "irf-port 1/1": [
+            "Ten-GigabitEthernet1/0/23", 
+            "Ten-GigabitEthernet1/0/24"
+        ]
+    }, 
+    "2c233a4e7e1f": {
+        "irfDomain": "3", 
+        "bravoSpineIp": "100.114.68.10", 
+        "snmpV2Write": [
+            "1.1.1.1", 
+            "1.1.1.2"
+        ], 
+        "firmwareBackup": "5900_5920-CMW710-R2311P06.ipe", 
+        "firmwareMain": "5900_5920-CMW710-R2311P06.ipe", 
+        "Switch Name": "TOR3", 
+        "multicastRp": "1.1.1.1", 
+        "alphaSpineIp": "100.114.64.10", 
+        "tftpServer": "10.1.1.1", 
+        "syslogServer": [
+            "1.1.1.1", 
+            "1.1.1.2"
+        ], 
+        "IRF": "1", 
+        "sflowCollector": "100.114.64.2", 
+        "fanDirection": "port-to-power", 
+        "snmpV2Read": [
+            "1.1.1.1", 
+            "1.1.1.2"
+        ], 
+        "irf-port 2/1": null, 
+        "irf-port 2/2": [
+            "Ten-GigabitEthernet2/0/23", 
+            "Ten-GigabitEthernet2/0/24"
+        ], 
+        "loopbackIp": "100.114.254.3", 
+        "irf-port 1/2": null, 
+        "irf-port 1/1": [
+            "Ten-GigabitEthernet1/0/23", 
+            "Ten-GigabitEthernet1/0/24"
+        ]
+    }, 
+    "2c233ab2e2ea": {
+        "irfDomain": "5", 
+        "bravoSpineIp": "100.114.68.18", 
+        "snmpV2Write": [
+            "1.1.1.1", 
+            "1.1.1.2"
+        ], 
+        "firmwareBackup": "5900_5920-CMW710-R2311P06.ipe", 
+        "firmwareMain": "5900_5920-CMW710-R2311P06.ipe", 
+        "Switch Name": "TOR5", 
+        "multicastRp": "1.1.1.1", 
+        "alphaSpineIp": "100.114.64.18", 
+        "tftpServer": "10.1.1.1", 
+        "syslogServer": [
+            "1.1.1.1", 
+            "1.1.1.2"
+        ], 
+        "IRF": "1", 
+        "sflowCollector": "100.114.64.2", 
+        "fanDirection": "port-to-power", 
+        "snmpV2Read": [
+            "1.1.1.1", 
+            "1.1.1.2"
+        ], 
+        "irf-port 2/1": null, 
+        "irf-port 2/2": [
+            "Ten-GigabitEthernet2/0/23", 
+            "Ten-GigabitEthernet2/0/24"
+        ], 
+        "loopbackIp": "100.114.254.5", 
+        "irf-port 1/2": null, 
+        "irf-port 1/1": [
+            "Ten-GigabitEthernet1/0/23", 
+            "Ten-GigabitEthernet1/0/24"
+        ]
+    }, 
+    "5c8a38b0ba05": {
+        "irfDomain": "6", 
+        "bravoSpineIp": "100.114.68.22", 
+        "snmpV2Write": [
+            "1.1.1.1", 
+            "1.1.1.2"
+        ], 
+        "firmwareBackup": "5900_5920-CMW710-R2311P06.ipe", 
+        "firmwareMain": "5900_5920-CMW710-R2311P06.ipe", 
+        "Switch Name": "TOR6", 
+        "multicastRp": "1.1.1.1", 
+        "alphaSpineIp": "100.114.64.22", 
+        "tftpServer": "10.1.1.1", 
+        "syslogServer": [
+            "1.1.1.1", 
+            "1.1.1.2"
+        ], 
+        "IRF": "2", 
+        "sflowCollector": "100.114.64.2", 
+        "fanDirection": "port-to-power", 
+        "snmpV2Read": [
+            "1.1.1.1", 
+            "1.1.1.2"
+        ], 
+        "irf-port 2/1": null, 
+        "irf-port 2/2": [
+            "Ten-GigabitEthernet2/0/23", 
+            "Ten-GigabitEthernet2/0/24"
+        ], 
+        "loopbackIp": "100.114.254.6", 
+        "irf-port 1/2": null, 
+        "irf-port 1/1": [
+            "Ten-GigabitEthernet1/0/23", 
+            "Ten-GigabitEthernet1/0/24"
+        ]
+    }, 
+    "2c233a5b744e": {
+        "irfDomain": "6", 
+        "bravoSpineIp": "100.114.68.32", 
+        "snmpV2Write": [
+            "1.1.1.1", 
+            "1.1.1.2"
+        ], 
+        "firmwareBackup": "5900_5920-CMW710-R2311P06.ipe", 
+        "firmwareMain": "5900_5920-CMW710-R2311P06.ipe", 
+        "Switch Name": "SpineAlpha", 
+        "multicastRp": "1.1.1.1", 
+        "alphaSpineIp": "100.114.64.32", 
+        "tftpServer": "10.1.1.1", 
+        "syslogServer": [
+            "1.1.1.1", 
+            "1.1.1.2"
+        ], 
+        "IRF": "1", 
+        "sflowCollector": "100.114.64.2", 
+        "fanDirection": "port-to-power", 
+        "snmpV2Read": [
+            "1.1.1.1", 
+            "1.1.1.2"
+        ], 
+        "irf-port 2/1": null, 
+        "irf-port 2/2": [
+            "Ten-GigabitEthernet2/0/23", 
+            "Ten-GigabitEthernet2/0/24"
+        ], 
+        "loopbackIp": "100.114.254.11", 
+        "irf-port 1/2": null, 
+        "irf-port 1/1": [
+            "Ten-GigabitEthernet1/0/23", 
+            "Ten-GigabitEthernet1/0/24"
+        ]
+    }, 
+    "2c233a5b72c8": {
+        "irfDomain": "5", 
+        "bravoSpineIp": "100.114.68.18", 
+        "snmpV2Write": [
+            "1.1.1.1", 
+            "1.1.1.2"
+        ], 
+        "firmwareBackup": "5900_5920-CMW710-R2311P06.ipe", 
+        "firmwareMain": "5900_5920-CMW710-R2311P06.ipe", 
+        "Switch Name": "TOR5", 
+        "multicastRp": "1.1.1.1", 
+        "alphaSpineIp": "100.114.64.18", 
+        "tftpServer": "10.1.1.1", 
+        "syslogServer": [
+            "1.1.1.1", 
+            "1.1.1.2"
+        ], 
+        "IRF": "2", 
+        "sflowCollector": "100.114.64.2", 
+        "fanDirection": "port-to-power", 
+        "snmpV2Read": [
+            "1.1.1.1", 
+            "1.1.1.2"
+        ], 
+        "irf-port 2/1": null, 
+        "irf-port 2/2": [
+            "Ten-GigabitEthernet2/0/23", 
+            "Ten-GigabitEthernet2/0/24"
+        ], 
+        "loopbackIp": "100.114.254.5", 
         "irf-port 1/2": null, 
         "irf-port 1/1": [
             "Ten-GigabitEthernet1/0/23", 

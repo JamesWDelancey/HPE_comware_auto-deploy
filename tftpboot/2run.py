@@ -8,7 +8,7 @@ switchList=json.loads(fin2.read())
 fin2.close()
 #print(switchList)
 for switch in switchList:
-    filename ='template2.txt'
+    filename ='template.txt'
     fin=open(filename,'r')
     data=fin.readlines()
     for i in data:
