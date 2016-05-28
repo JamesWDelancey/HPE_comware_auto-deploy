@@ -24,7 +24,7 @@ echo 'auto enxb827ebfb8e94' >> /etc/network/interfaces
 echo 'iface enxb827ebfb8e94 inet static' >> /etc/network/interfaces
 echo '    address 10.1.1.1' >> /etc/network/interfaces
 echo '    netmask 255.255.255.0' >> /etc/network/interfaces
-Edit these for your environment
+#Edit these for your environment
 ifdown enxb827ebfb8e94 && ifup enxb827ebfb8e94
 ifconfig | grep addr
 pip install pyyaml
