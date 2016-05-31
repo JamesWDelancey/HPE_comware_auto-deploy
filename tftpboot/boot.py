@@ -93,6 +93,8 @@ def configureSwitch():
         comware.CLI("delete /unreserved *.json")
         comware.CLI("delete /unreserved *.py")
         comware.CLI("delete /unreserved *.pyc")
+    except SystemError: pass
+    try: 
         comware.CLI("sys ; public-key local create rsa")
         comware.CLI("ping 8.8.8.8")
     except SystemError: pass
