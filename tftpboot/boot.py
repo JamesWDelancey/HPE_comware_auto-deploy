@@ -1,14 +1,25 @@
-## Copyright 2016. by James Delancey
+# Comware Ansible by CSV  wookieware 2016
+# Base on James Delancy's orighinal version this script
+# uses the python "string" import to access the Template function
+
 import comware
 import os
 import sys
-import json
+import csv
+from string import Template
 
-# Name variables, these can be replaced by SED if needed
-serverTftp="10.1.1.1"
-serverdataFtp="10.1.1.1"
-file2="template.txt"
-file3="varMatrix.json"
+# Create application variables
+#--------------------------------------------------
+
+count = 0
+serverTftp="172.16.0.2"
+serverdataFtp="172.16.0.2"
+file2="ansible_template.txt"
+file3="varMatrix.csv"
+
+#--------------------------------------------------
+
+
 def copyFiles():
     try:
         comware.CLI("system ; interface m0/0/0 ; ip address dhcp")
@@ -24,87 +35,65 @@ def copyFiles():
         pass
 
 def configureSwitch():
-    switchMacAddress=comware.CLI("disp irf | i MAC").get_output()[1][-14:].replace("-","")
-    filename2 ='flash:/varMatrix.json'
-    fin2=open(filename2,'r')
-    switchList=json.loads(fin2.read())
-    fin2.close()
-#    #print(switchList)
-    for switch in switchList:
-        if switch==switchMacAddress:
-            try:
-                comware.CLI("sys ; irf member 2 renumber " + switchList[switch]['IRF'])
-            except SystemError: pass
-            try:
-                comware.CLI("sys ; irf member 3 renumber " + switchList[switch]['IRF'])
-            except SystemError: pass
-            try:
-                comware.CLI("sys ; irf member 1 renumber " + switchList[switch]['IRF'])
-            except SystemError: pass
-            try:
-                comware.CLI("copy ftp://james:demo@" + switchList[switch]['tftpServer'] + "/comware/tftpboot/" + switchList[switch]['firmwareBackup'] + " .")
-#    #            comware.CLI("ftp " + switchList[switch]['tftpServer'] + " get " + switchList[switch]['firmwareBackup'])
-            except SystemError: pass
-            comware.CLI("delete /unreserved *.bin")
-            try:
-                comware.CLI("boot-loader file flash:/" + switchList[switch]['firmwareBackup'] + " s 1 b")
-            except SystemError: pass
-            try:
-                comware.CLI("boot-loader file flash:/" + switchList[switch]['firmwareBackup'] + " s 2 b")
-            except SystemError: pass
-            try:
-                comware.CLI("boot-loader file flash:/" + switchList[switch]['firmwareBackup'] + " s 3 b")
-            except SystemError: pass
-            try:
-                comware.CLI("copy ftp://james:demo@" + switchList[switch]['tftpServer'] + "/comware/tftpboot/" + switchList[switch]['firmwareMain'] + " .")
-    #            comware.CLI("ftp " + switchList[switch]['tftpServer'] + " get " + switchList[switch]['firmwareMain'])
-            except SystemError: pass
-            try:
-                comware.CLI("boot-loader file flash:/" + switchList[switch]['firmwareBackup'] + " s 1 m")
-            except SystemError: pass
-            try:
-                comware.CLI("boot-loader file flash:/" + switchList[switch]['firmwareBackup'] + " s 2 m")
-            except SystemError: pass
-            try:
-                comware.CLI("boot-loader file flash:/" + switchList[switch]['firmwareBackup'] + " s 3 m")
-            except SystemError: pass
-            comware.CLI("delete /unreserved *.ipe")
-            filename3 ='flash:/startup.cfg'
-            fin3=open(filename3,'w')
-            filename ='flash:/template.txt'
-            fin=open(filename,'r')
-            data=fin.readlines()
-            print switch
-            for i in data:
-                j= i.replace('{{','""" + ').replace('}}',' + """')
-                if '[' in j:
-                    fin3.write(eval('"""'+j.replace('"',"'").replace("'''",'"""')+'"""'))
-                else: fin3.write(j)
-            fin.close()
-            fin3.close()
-        else : pass
+
+	# Set counter to track items
+	
+	count = 0
+
+	#open the template
+	
+	form = open('flash:/ansible_template.txt', 'r')
+	src = Template( form.read() )
+
+	
+	#open the csv file build Dictionary
+    
+	csvfile = open('flash:/varMatrix.csv', 'r')
+	content = csv.DictReader(csvfile)
+	switch = []
+	print switch
+	for row in content:
+		switch.append(row)
+
+	# how many switches do we have? 
+		
+	check = len(switch) 
+
+	# Get system MAC address
+  
+	switchMacAddress=comware.CLI("disp irf | i MAC").get_output()[1][-14:]
 
 
+	while (count < check):
+		
+		#Substitute CSV variables in the template file
 
-    comware.CLI('startup saved-configuration startup.cfg backup')
-    comware.CLI('startup saved-configuration startup.cfg main')
-    try: 
-        comware.CLI("delete /unreserved *.txt")
-        comware.CLI("delete /unreserved *.json")
-        comware.CLI("delete /unreserved *.py")
-        comware.CLI("delete /unreserved *.pyc")
-    except SystemError: pass
-    try: 
-        comware.CLI("sys ; public-key local create rsa")
-        comware.CLI("ping 8.8.8.8")
-    except SystemError: pass
-    try:
-        comware.CLI('reboot force')
-    except SystemError: pass
+		if switchMacAddress == switch[count]['mac']:
+			result = src.substitute(switch[count])
+			config = open('flash:/startup.cfg','w')
+			config.write(result)
+		count = count + 1
+
+	# Be nice and close the files
+	
+	csvfile.close()
+	form.close()
+
+def cleanup():
+
+	# Clean this mess up else we all wind up in jail
+
+	comware.CLI('startup saved-configuration startup.cfg backup')
+	comware.CLI('startup saved-configuration startup.cfg main')
+	comware.CLI('delete /unreserved *.txt')
+	comware.CLI('delete /unreserved *.csv')
+	comware.CLI('sys ; public-key local create rsa')
+	comware.CLI('ping 8.8.8.8')
+	comware.CLI('reboot force')
+	
 
 
 copyFiles()
 configureSwitch()
+cleanup()
 quit()
-
-
